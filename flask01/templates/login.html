@@ -1,0 +1,30 @@
+<form action="chuli" method="POST">
+    yonghuming:<input type="text" name="uname"  >
+    mima :<input type="password" name="pwd"  >
+    <input type="submit" value="   提   交   ">
+    <br> {{msg}} <br>
+    {{ u }}
+</form>
+<br>
+ <table>
+
+       <tr>
+           <td>ID</td>
+           <td>题目</td>
+           <td>内容</td>
+           <td>日期</td>
+       </tr>
+
+
+ {% for u in u %}
+       <tr>
+           <td>{{u.Id}}</td>   <!--空格，坑，render函数渲染不通过 -->
+           <td>{{u.title}}</td>
+           <td>{{u.content}}</td>
+           <td>{{u.data}}</td>
+
+       </tr>
+ {% endfor %}
+
+</table>
+
