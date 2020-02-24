@@ -1,0 +1,7 @@
+net use h: \\172.24.0.9\设计资料(查询)
+
+h:
+pause
+xcopy *.dwg /s /D  f:\dwg
+
+net use h: /del

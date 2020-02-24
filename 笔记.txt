@@ -1,0 +1,11 @@
+
+
+
+通过清华源安装scapy模块：
+       pip install -i https://pypi.tuna.tsinghua.edu.cn/simple scapy
+
+win10 selenium 配置：
+    环境变量添加python
+    下载firefox远程控制中间（git上）件放到python script目录
+
+文件名不要和函数一样，否则调用优先本身

@@ -1,0 +1,172 @@
+VERSION 5.00
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm2 
+   Caption         =   "UserForm2"
+   ClientHeight    =   5040
+   ClientLeft      =   45
+   ClientTop       =   375
+   ClientWidth     =   6465
+   OleObjectBlob   =   "shaixuan061006.frx":0000
+   ShowModal       =   0   'False
+   StartUpPosition =   1  '所有者中心
+End
+Attribute VB_Name = "UserForm2"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Private Sub CommandButton1_Click()
+  Sheet1.Range("A1:AE12000").ClearContents
+End Sub
+
+Private Sub CommandButton10_Click()
+    Dim mg As Range
+  For Each mg In [ac2:ac10000]
+    If Cells(mg.Row, 20).Value = "" Then
+         If mg.Value = "->已好" Or mg.Value = "->已处理" Or mg.Value = "->已处理好" Or mg.Value = "->处理已好" Then
+             Cells(mg.Row, 30).Value = "已好"
+         End If
+    End If
+   Next
+End Sub
+
+Private Sub CommandButton11_Click()
+  Dim r, i
+  r = ActiveSheet.UsedRange
+  For i = 2 To UBound(r, 1)
+    Cells(i, 8) = Val(Cells(i, 8))
+ Next i
+End Sub
+
+Private Sub CommandButton12_Click()
+  Dim r, i
+  r = ActiveSheet.UsedRange
+  For i = 2 To UBound(r, 1)
+    Cells(i, 31) = "=vlookup(h" & i & ",wangge!A:C,2,0)"
+ Next i
+ Cells(1, 31).Value = "网格"
+End Sub
+
+Private Sub CommandButton2_Click()
+   Columns(29).EntireColumn.Insert
+ Dim r, i
+  r = ActiveSheet.UsedRange
+  For i = 2 To UBound(r, 1)
+   Cells(i, 29) = Cells(i, 19).Value + Cells(i, 20).Value
+ Next i
+ Cells(1, 29).Value = "查询"
+ Cells(1, 30).Value = "分类"
+End Sub
+
+Private Sub CommandButton3_Click()
+  Dim mg As Range
+  For Each mg In [ac2:ac10000]
+    If Cells(mg.Row, 6).Value Like "*互动*" Then
+       Select Case True
+           Case mg.Value Like "*机顶盒*" Or mg.Value Like "*遥控器*" Or mg.Value Like "*电视机*"
+                Cells(mg.Row, 30).Value = "互动-用户端设备"
+           Case mg.Value Like "*指导已好*" Or mg.Value Like "*转换*" Or mg.Value Like "*操作*"
+                Cells(mg.Row, 30).Value = "互动-用户操作问题"
+           Case mg.Value Like "*撤单*" Or mg.Value Like "*联系时已好*" Or mg.Value Like "*联系已好*" Or mg.Value Like "*联系用户已好*" Or mg.Value Like "*来电已好*" Or mg.Value Like "*称已好*" Or mg.Value Like "*客户已好*" Or mg.Value Like "*用户已好*"
+                Cells(mg.Row, 30).Value = "互动-自行恢复"
+           Case Else
+                 Cells(mg.Row, 30).Value = "互动-剩余"
+           End Select
+    End If
+   Next
+End Sub
+
+Private Sub CommandButton4_Click()
+  Dim mg As Range
+  For Each mg In [ac2:ac10000]
+    If mg.Value Like "*电力*" Or mg.Value Like "*公用*" Or mg.Value Like "*供电*" Or mg.Value Like "*停电*" Or mg.Value Like "*掉电*" Or mg.Value Like "*换电表*" Then
+         Cells(mg.Row, 30).Value = "电力"
+    End If
+   Next
+End Sub
+
+Private Sub CommandButton5_Click()
+  Dim mg As Range
+  For Each mg In [ac2:ac10000]
+    If mg.Value Like "*光网*" Or mg.Value Like "*光改*" Then
+         Cells(mg.Row, 30).Value = "光改"
+    End If
+   Next
+End Sub
+
+Private Sub CommandButton6_Click()
+  Dim mg As Range
+  For Each mg In [ac2:ac10000]
+    If Cells(mg.Row, 6).Value Like "*数字电视*" Or Cells(mg.Row, 6).Value Like "*模拟电视*" Then
+       Select Case True
+           Case mg.Value Like "*机顶盒*" Or mg.Value Like "*遥控器*" Or mg.Value Like "*电视机*"
+                Cells(mg.Row, 30).Value = "直播-用户端设备"
+           Case mg.Value Like "*指导已好*" Or mg.Value Like "*转换*" Or mg.Value Like "*操作*"
+                Cells(mg.Row, 30).Value = "直播-用户操作问题"
+           Case mg.Value Like "*撤单*" Or mg.Value Like "*联系时已好*" Or mg.Value Like "*联系已好*" Or mg.Value Like "*联系用户已好*" Or mg.Value Like "*来电已好*" Or mg.Value Like "*称已好*" Or mg.Value Like "*客户已好*" Or mg.Value Like "*用户已好*"
+                Cells(mg.Row, 30).Value = "直播-自行恢复"
+           Case Else
+                 Cells(mg.Row, 30).Value = "直播-剩余"
+           End Select
+    End If
+   Next
+End Sub
+
+Private Sub CommandButton7_Click()
+  Dim mg As Range
+  For Each mg In [ac2:ac10000]
+    If Cells(mg.Row, 6).Value Like "*宽带业务*" Then
+       Select Case True
+           Case mg.Value Like "*路由器*" Or mg.Value Like "*电脑*" Or mg.Value Like "*手机*" Or mg.Value Like "*wifi*"
+                Cells(mg.Row, 30).Value = "数据-用户端设备"
+           Case mg.Value Like "*指导*" Or mg.Value Like "*教*" Or mg.Value Like "*操作*"
+                Cells(mg.Row, 30).Value = "数据-用户操作问题"
+           Case mg.Value Like "*平台*" Or mg.Value Like "*网速*" Or mg.Value Like "*网站*" Or mg.Value Like "*优化*"
+                Cells(mg.Row, 30).Value = "数据-网速慢"
+           Case mg.Value Like "*撤单*" Or mg.Value Like "*联系时已好*" Or mg.Value Like "*联系已好*" Or mg.Value Like "*联系用户已好*" Or mg.Value Like "*来电已好*" Or mg.Value Like "*称已好*" Or mg.Value Like "*客户已好*" Or mg.Value Like "*用户已好*"
+                Cells(mg.Row, 30).Value = "数据-自行恢复"
+           Case Else
+                 Cells(mg.Row, 30).Value = "数据-剩余"
+           End Select
+    End If
+   Next
+End Sub
+
+Private Sub CommandButton8_Click()
+  Dim mg As Range
+  For Each mg In [ac2:ac10000]
+    If Cells(mg.Row, 6).Value Like "*OTT*" And Cells(mg.Row, 24).Value Like "*纯OTT*" Then
+       Select Case True
+           Case mg.Value Like "*机顶盒*" Or mg.Value Like "*遥控器*" Or mg.Value Like "*电视机*" Or mg.Value Like "*猫*"
+                Cells(mg.Row, 30).Value = "纯OTT-用户端设备"
+           Case mg.Value Like "*指导已好*" Or mg.Value Like "*转换*" Or mg.Value Like "*操作*"
+                Cells(mg.Row, 30).Value = "纯OTT-用户操作问题"
+           Case mg.Value Like "*撤单*" Or mg.Value Like "*联系时已好*" Or mg.Value Like "*联系已好*" Or mg.Value Like "*联系用户已好*" Or mg.Value Like "*来电已好*" Or mg.Value Like "*称已好*" Or mg.Value Like "*客户已好*" Or mg.Value Like "*用户已好*"
+                Cells(mg.Row, 30).Value = "纯OTT-自行恢复"
+           Case Else
+                 Cells(mg.Row, 30).Value = "纯OTT-剩余"
+         End Select
+       ElseIf Cells(mg.Row, 6).Value Like "*OTT*" And Not Cells(mg.Row, 24).Value Like "*纯OTT*" Then
+             Select Case True
+              Case mg.Value Like "*机顶盒*" Or mg.Value Like "*遥控器*" Or mg.Value Like "*电视机*" Or mg.Value Like "*猫*" Or mg.Value Like "*网关*"
+                   Cells(mg.Row, 30).Value = "DVB+OTT-用户端设备"
+              Case mg.Value Like "*指导已好*" Or mg.Value Like "*转换*" Or mg.Value Like "*操作*"
+                   Cells(mg.Row, 30).Value = "DVB+OTT-用户操作问题"
+              Case mg.Value Like "*撤单*" Or mg.Value Like "*联系时已好*" Or mg.Value Like "*联系已好*" Or mg.Value Like "*联系用户已好*" Or mg.Value Like "*来电已好*" Or mg.Value Like "*称已好*" Or mg.Value Like "*客户已好*" Or mg.Value Like "*用户已好*"
+                Cells(mg.Row, 30).Value = "DVB+OTT-自行恢复"
+              Case Else
+                    Cells(mg.Row, 30).Value = "DVB+OTT-剩余"
+              End Select
+       End If
+   Next
+
+End Sub
+
+Private Sub CommandButton9_Click()
+    Dim i, r
+    r = ActiveSheet.UsedRange
+  For i = 2 To UBound(r, 1)
+    If Cells(i, 29).Value = "" Then
+         Cells(i, 30).Value = "大故障"
+    End If
+   Next
+End Sub
